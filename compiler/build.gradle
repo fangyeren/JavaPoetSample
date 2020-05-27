@@ -1,0 +1,22 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly'com.google.auto.service:auto-service:1.0-rc7'
+    annotationProcessor'com.google.auto.service:auto-service:1.0-rc7'
+    // 依赖注解
+    implementation project(":annotation")
+
+    //
+    implementation "com.squareup:javapoet:1.12.1"
+}
+
+// 防止控制台输出中文乱码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
