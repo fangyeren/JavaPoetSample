@@ -5,18 +5,17 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.fangye.javapoetdemo1"
-        minSdkVersion 16
+        applicationId "com.fangye.javapoetdemo"
+        minSdkVersion 17
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        // defaultConfig
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [value: 'com.fangye.javapoetdemo1']
+                arguments = [moduleName: project.getName(), packageNameForAPT: packageNameForAPT]
             }
         }
     }
@@ -45,7 +44,8 @@ dependencies {
     implementation project(":user")
     implementation project(":intelligent")
     implementation project(":tutor")
+    implementation project(":study")
 
-//    implementation project(":annotation")
-//    annotationProcessor project(":compiler")
+    implementation project(":annotation")
+    annotationProcessor project(":compiler")
 }

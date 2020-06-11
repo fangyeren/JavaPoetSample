@@ -2,35 +2,29 @@ package com.fangye.tutor;
 
 import android.os.Bundle;
 
+import com.fangye.annotation.TestRouter;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
-
-import com.fangye.annotation.TestRouter;
-import com.fangye.tutor.databinding.ActivityTutorBinding;
 
 /**
- * Description: TODO 。
- *
- * @ProjectName: JavaPoetDemo1
- * @Package: com.fangye.user
- * @Author: shijiaxiong@moyi365.com
- * @UpdateDate: 2020/5/25 15:25
+ * 口语家教首页
  */
-@TestRouter(path="tutor/tutor_main")
+@TestRouter(path = "/tutor/tutor_main")
 public class TutorMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityTutorBinding viewDataBinding  = DataBindingUtil.setContentView(this, R.layout.activity_tutor);
-        viewDataBinding.setLifecycleOwner(this);
-        viewDataBinding.setClick(new ClickProxy());
+        setContentView(R.layout.activity_tutor);
+        //        ActivityTutorBinding viewDataBinding  = DataBindingUtil.setContentView(this, R.layout.activity_tutor);
+        //        viewDataBinding.setLifecycleOwner(this);
+        //        viewDataBinding.setClick(new ClickProxy());
     }
 
-    public class ClickProxy{
-        public void onClick(){
+    public class ClickProxy {
+
+        public void onClick() {
 
         }
     }

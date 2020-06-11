@@ -15,7 +15,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [value: 'com.fangye.user']
+                arguments = [moduleName: project.getName(), packageNameForAPT: packageNameForAPT]
             }
         }
     }
@@ -39,6 +39,6 @@ dependencies {
 
     implementation project(":business")
 
-    //    implementation project(":annotation")
-//    annotationProcessor project(":compiler")
+    implementation project(":annotation")
+    annotationProcessor project(":compiler")
 }

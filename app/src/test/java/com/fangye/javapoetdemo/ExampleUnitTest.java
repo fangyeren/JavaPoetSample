@@ -1,4 +1,4 @@
-package com.fangye.javapoetdemo1;
+package com.fangye.javapoetdemo;
 
 import org.junit.Test;
 

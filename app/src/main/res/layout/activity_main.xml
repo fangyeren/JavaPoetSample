@@ -1,58 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <data>
-        <variable
-            name="click"
-            type="com.fangye.javapoetdemo1.MainActivity.ClickProxy" />
-    </data>
-
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
+        android:text="学习中心首页" />
+
+    <Button
+        android:id="@+id/btn_normal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:text="学习中心首页"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginBottom="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:text="普通方式跳转"
-            android:onClick="@{()->click.onNormal()}"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="普通方式跳转" />
 
 
-        <Button
-            android:text="全局MAP跳转"
-            android:onClick="@{()->click.onGlabolMap()}"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="全局MAP跳转" />
 
 
-        <Button
-            android:text="类加载方式跳转"
-            android:onClick="@{()->click.onClassLoader()}"
-            android:layout_width="match_parent"
-            android:layout_marginBottom="20dp"
-            android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_classload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="类加载方式跳转" />
 
-        <Button
-            android:layout_marginBottom="20dp"
-            android:text="路由方式跳转"
-            android:onClick="@{()->click.onRouter()}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btn_router"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="路由方式跳转" />
 
 
-    </LinearLayout>
-</layout>
+</LinearLayout>
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<TextView-->
+    <!--    android:layout_width="wrap_content"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_gravity="center"-->
+    <!--    android:layout_marginBottom="50dp"-->
+    <!--    android:gravity="center"-->
+    <!--    android:text="学习中心首页" />-->
+
+    <!--<Button-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginBottom="20dp"-->
+    <!--    android:onClick="@{() -> click.onNormal()}"-->
+    <!--    android:text="普通方式跳转" />-->
+
+
+    <!--<Button-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginBottom="20dp"-->
+    <!--    android:onClick="@{() -> click.onGlabolMap()}"-->
+    <!--    android:text="全局MAP跳转" />-->
+
+
+    <!--<Button-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginBottom="20dp"-->
+    <!--    android:onClick="@{() -> click.onClassLoader()}"-->
+    <!--    android:text="类加载方式跳转" />-->
+
+    <!--<Button-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="wrap_content"-->
+    <!--    android:layout_marginBottom="20dp"-->
+    <!--    android:onClick="@{() -> click.onRouter()}"-->
+    <!--    android:text="路由方式跳转" />-->
+
+
+    <!--</LinearLayout>-->

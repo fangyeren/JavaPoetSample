@@ -40,7 +40,7 @@ import javax.tools.Diagnostic.Kind;
 // 使用的源代码版本 ，这个必须要写
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 //从各个模块传入进来的数据，通过apt传进来
-@SupportedOptions(Config.OPTION_VALUE)
+@SupportedOptions({Config.OPTION_MODULE_NAME,Config.OPTION_PACKAGE_NAME})
 public class TestRouterProcessor extends AbstractProcessor {
 
     /**
@@ -50,7 +50,8 @@ public class TestRouterProcessor extends AbstractProcessor {
     private Filer mFiler;         //文件生成器，生成类、资源等
     private Messager mMessager;    //用来打印日志的
     private Types mTypeUtils;   //类信息工具类
-    private String mAptPackage;
+    private String mAptPackage;  // apt生成文件包名
+    private String mOptionModuleName;  //moduleName
 
     /**
      * 初使化工作，提供一些工具
@@ -64,8 +65,9 @@ public class TestRouterProcessor extends AbstractProcessor {
         mFiler = processingEnvironment.getFiler();
         mMessager = processingEnvironment.getMessager();
         mTypeUtils = processingEnvironment.getTypeUtils();
-        mAptPackage = processingEnvironment.getOptions().get(Config.OPTION_VALUE);
-        mMessager.printMessage(Diagnostic.Kind.NOTE, "===init=====:mAptPackage:" + mAptPackage);
+        mOptionModuleName = processingEnvironment.getOptions().get(Config.OPTION_MODULE_NAME);
+        mAptPackage = processingEnvironment.getOptions().get(Config.OPTION_PACKAGE_NAME);
+        mMessager.printMessage(Diagnostic.Kind.NOTE, "===init=====:mAptPackage:" + mAptPackage+"\nmOptionModuleName:"+mOptionModuleName);
     }
 
     /**
@@ -109,13 +111,20 @@ public class TestRouterProcessor extends AbstractProcessor {
             if(!path.isEmpty()){
                 if(path.contains("/")) {
                     String[] s = path.split("/");
-                    group = s[0];
-                    name = s[1];
+                    if(s.length==3){
+                        group = s[1];
+                        name = s[2];
+                    }else if(s.length==2){
+                        group = s[0];
+                        name = s[1];
+                    }
+
                 }
             }
-            mMessager.printMessage(Kind.NOTE, "=====7================path:"+testRouter.path());
+            mMessager.printMessage(Kind.NOTE, "=====7-1================path:"+testRouter.path());
             mMessager.printMessage(Kind.NOTE, "=====8===============group:"+testRouter.group());
             mMessager.printMessage(Kind.NOTE, "=====8-1===============group2:"+group);
+            mMessager.printMessage(Kind.NOTE, "=====8-2===============name:"+name);
 
 
            /* public class HelloJavaPoet {
@@ -129,7 +138,7 @@ public class TestRouterProcessor extends AbstractProcessor {
                                         .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                                         .returns(void.class)
                                         .addParameter(System[].class, "args")
-                                        .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet ，这是"+group+"模块~")
+                                        .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet ，这是"+group+"模块,"+name+"页面")
                                         .build();
 
             //2、再写类

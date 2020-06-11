@@ -1,2 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.fangye.intelligent" />
+    package="com.fangye.intelligent">
+
+
+    <application>
+
+        <activity
+            android:name=".IntelligentMainActivity"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>
