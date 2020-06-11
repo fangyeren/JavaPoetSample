@@ -77,13 +77,12 @@ public class TestRouterProcessor extends AbstractProcessor {
      */
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
-        mMessager.printMessage(Kind.NOTE, "=====process====1==========");
+
         if (set.isEmpty()) {
-            mMessager.printMessage(Kind.NOTE, "===2=没有发现被TestRouter注解的地方=====");
+            mMessager.printMessage(Kind.NOTE, "===1=没有发现被TestRouter注解的地方=====");
             return false;
         }
-
-        mMessager.printMessage(Kind.NOTE, "=====process=3=============");
+        mMessager.printMessage(Kind.NOTE, "=====process=2=============");
         TypeElement activityType = mElementUtils.getTypeElement(Config.ACTIVITY_PACKAGE);
         TypeMirror activityMirror = activityType.asType();
 

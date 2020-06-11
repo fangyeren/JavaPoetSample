@@ -40,7 +40,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 
+    implementation project(":business")
 
-    implementation project(":annotation")
-    annotationProcessor project(":compiler")
+    implementation project(":user")
+    implementation project(":intelligent")
+    implementation project(":tutor")
+
+//    implementation project(":annotation")
+//    annotationProcessor project(":compiler")
 }
