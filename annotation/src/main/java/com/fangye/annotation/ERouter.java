@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 //class 代表的是编译环节
 @Retention(RetentionPolicy.CLASS)
-public @interface TestRouter {
+public @interface ERouter {
     /**
      *   路径信息
      * @return
@@ -20,7 +20,7 @@ public @interface TestRouter {
     String path();
 
     /**
-     * 组信息，这里我们可以认为是模块名称，比如我们的个人中心、学生中心模块
+     * 组信息，这里我们可以认为是模块名称，比如我们的个人中心、学生中心模块、智能备考、口语家教等模块
      * @return
      */
     String group() default "";

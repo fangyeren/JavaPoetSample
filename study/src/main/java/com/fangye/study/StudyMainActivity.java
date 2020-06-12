@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 
 
@@ -11,6 +13,7 @@ import com.fangye.annotation.TestRouter;
  * 学习中心首页
  */
 @TestRouter(path="study/study_main")
+@ERouter(path="study/study_main")
 public class StudyMainActivity extends AppCompatActivity {
 
     @Override

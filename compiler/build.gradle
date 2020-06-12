@@ -2,12 +2,15 @@ apply plugin: 'java-library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //编译期做事情的服务
     compileOnly'com.google.auto.service:auto-service:1.0-rc7'
     annotationProcessor'com.google.auto.service:auto-service:1.0-rc7'
+
     // 依赖注解
     implementation project(":annotation")
 
-    //
+    //javapoet
     implementation "com.squareup:javapoet:1.12.1"
 }
 

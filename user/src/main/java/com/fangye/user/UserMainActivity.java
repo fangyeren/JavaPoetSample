@@ -2,6 +2,7 @@ package com.fangye.user;
 
 import android.os.Bundle;
 
+import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * 个人中心首页
  */
 @TestRouter(path = "/user/user_main")
+@ERouter(path = "/user/user_main")
 public class UserMainActivity extends AppCompatActivity {
 
     @Override

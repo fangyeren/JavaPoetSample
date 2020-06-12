@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 import com.fangye.business.GlobalPathManager;
 import com.fangye.business.base.BaseActivity;
@@ -14,6 +15,7 @@ import com.fangye.user.UserMainActivity;
 import androidx.databinding.DataBindingUtil;
 
 @TestRouter(path = "/app/main_home")
+@ERouter(path = "/app/main_home")
 public class MainActivity extends BaseActivity {
 
     @Override

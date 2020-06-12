@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 import com.fangye.business.base.BaseActivity;
 
@@ -11,6 +12,7 @@ import com.fangye.business.base.BaseActivity;
  * 智能备考首页
  */
 @TestRouter(path="intelligent/intelligent_main")
+@ERouter(path="intelligent/intelligent_main")
 public class IntelligentMainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -2,6 +2,7 @@ package com.fangye.tutor;
 
 import android.os.Bundle;
 
+import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * 口语家教首页
  */
 @TestRouter(path = "/tutor/tutor_main")
+@ERouter(path = "/tutor/tutor_main")
 public class TutorMainActivity extends AppCompatActivity {
 
     @Override
