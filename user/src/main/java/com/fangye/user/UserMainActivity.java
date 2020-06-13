@@ -2,6 +2,7 @@ package com.fangye.user;
 
 import android.os.Bundle;
 
+import com.fangye.annotation.EAutowired;
 import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 import androidx.annotation.Nullable;
@@ -14,6 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 @ERouter(path = "/user/user_main")
 public class UserMainActivity extends AppCompatActivity {
 
+    @EAutowired
+    String name;
+
+
+    @EAutowired
+    String age;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

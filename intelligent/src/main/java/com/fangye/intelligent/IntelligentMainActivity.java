@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.fangye.annotation.EAutowired;
 import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 import com.fangye.business.base.BaseActivity;
@@ -14,6 +15,10 @@ import com.fangye.business.base.BaseActivity;
 @TestRouter(path="/intelligent/intelligent_main")
 @ERouter(path="/intelligent/intelligent_main")
 public class IntelligentMainActivity extends BaseActivity {
+
+    @EAutowired
+    String name;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

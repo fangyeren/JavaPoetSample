@@ -2,6 +2,7 @@ package com.fangye.tutor;
 
 import android.os.Bundle;
 
+import com.fangye.annotation.EAutowired;
 import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 
@@ -14,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 @TestRouter(path = "/tutor/tutor_main")
 @ERouter(path = "/tutor/tutor_main")
 public class TutorMainActivity extends AppCompatActivity {
+
+    @EAutowired
+    String name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
