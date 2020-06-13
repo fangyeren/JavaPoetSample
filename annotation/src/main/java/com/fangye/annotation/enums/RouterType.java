@@ -18,6 +18,15 @@ public enum RouterType {
         return this;
     }
 
+    public static String getClassName(int index) {
+        for (RouterType c : RouterType.values()) {
+            if (c.getId() == index) {
+                return c.className;
+            }
+        }
+        return null;
+    }
+
     public String getClassName() {
         return className;
     }

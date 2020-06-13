@@ -135,10 +135,10 @@ public class RouterEntity {
     public String toString() {
         return "RouterEntity{" +
                 "rawType=" + rawType +
-                ", destination=" + destination +
-                ", type=" + type +
-                ", path='" + path + '\'' +
-                ", group='" + group + '\'' +
+                ", \ndestination=" + destination +
+                ", \ntype=" + type +
+                ", \npath='" + path + '\'' +
+                ", \ngroup='" + group + '\'' +
                 '}';
     }
 }

@@ -11,8 +11,8 @@ import com.fangye.business.base.BaseActivity;
 /**
  * 智能备考首页
  */
-@TestRouter(path="intelligent/intelligent_main")
-@ERouter(path="intelligent/intelligent_main")
+@TestRouter(path="/intelligent/intelligent_main")
+@ERouter(path="/intelligent/intelligent_main")
 public class IntelligentMainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
