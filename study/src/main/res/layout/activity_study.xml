@@ -12,4 +12,11 @@
         android:gravity="center"
         android:text="学习中心首页" />
 
+    <Button
+        android:text="路由打开智能备考首页"
+        android:layout_marginTop="50dp"
+        android:id="@+id/btn_open_intelligent_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

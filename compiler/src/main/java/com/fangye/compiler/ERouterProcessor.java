@@ -52,7 +52,7 @@ import javax.tools.Diagnostic.Kind;
 // 使用的源代码版本 ，这个必须要写
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 //从各个模块传入进来的数据，通过apt传进来
-@SupportedOptions({Config.OPTION_MODULE_NAME,Config.OPTION_PACKAGE_NAME})
+@SupportedOptions({Config.OPTION_MODULE_NAME, Config.OPTION_PACKAGE_NAME})
 public class ERouterProcessor extends AbstractProcessor {
 
     /**
@@ -85,7 +85,7 @@ public class ERouterProcessor extends AbstractProcessor {
         mTypeUtils = processingEnvironment.getTypeUtils();
         mOptionModuleName = processingEnvironment.getOptions().get(Config.OPTION_MODULE_NAME);
         mAptPackage = processingEnvironment.getOptions().get(Config.OPTION_PACKAGE_NAME);
-        mMessager.printMessage(Kind.NOTE, "ERouter:===init=====:mAptPackage:" + mAptPackage+"\nmOptionModuleName:"+mOptionModuleName);
+        mMessager.printMessage(Kind.NOTE, "ERouter:===init=====:mAptPackage:" + mAptPackage + "\nmOptionModuleName:" + mOptionModuleName);
     }
 
     /**
@@ -101,12 +101,12 @@ public class ERouterProcessor extends AbstractProcessor {
         if (set.isEmpty()) {
             return false;
         }
-        mMessager.printMessage(Kind.NOTE, "ERouter:====1======RouterType======="+RouterType.ACTIVITY.getClassName());
+        mMessager.printMessage(Kind.NOTE, "ERouter:====1======RouterType=======" + RouterType.ACTIVITY.getClassName());
         TypeElement activityType = mElementUtils.getTypeElement(RouterType.ACTIVITY.getClassName());
         TypeMirror activityMirror = activityType.asType();
 
         Set<? extends Element> elements = roundEnvironment.getElementsAnnotatedWith(ERouter.class);
-        if(elements==null||elements.isEmpty()){
+        if (elements == null || elements.isEmpty()) {
             mMessager.printMessage(Kind.NOTE, "ERouter:==2=没有发现被ERouter注解的地方=====");
             return false;
         }
@@ -118,7 +118,7 @@ public class ERouterProcessor extends AbstractProcessor {
              */
             // 获取包名
             String packageName = mElementUtils.getPackageOf(element).getQualifiedName().toString();
-            mMessager.printMessage(Kind.NOTE, "ERouter:======3====packageName:"+packageName);
+            mMessager.printMessage(Kind.NOTE, "ERouter:======3====packageName:" + packageName);
             // 获取简单类名，例如：StudyMainActivity
             String className = element.getSimpleName().toString();
             mMessager.printMessage(Kind.NOTE, "ERouter:=====4===被@ERouter注解的类有：" + className); // 打印出 就证明APT没有问题
@@ -128,7 +128,7 @@ public class ERouterProcessor extends AbstractProcessor {
              */
             ERouter erouter = element.getAnnotation(ERouter.class);
             String path = erouter.path();
-            mMessager.printMessage(Kind.NOTE, "ERouter:==5=拿到Erouter的注解信息======path:"+path);
+            mMessager.printMessage(Kind.NOTE, "ERouter:==5=拿到Erouter的注解信息======path:" + path);
 
 
             /**
@@ -139,7 +139,7 @@ public class ERouterProcessor extends AbstractProcessor {
                     .addPath(erouter.path())
                     .addElement(element)
                     .build();
-            mMessager.printMessage(Kind.NOTE, "ERouter:=6=routerEntity======routerEntity:"+routerEntity.toString()+"\n"+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=6=routerEntity======routerEntity:" + routerEntity.toString() + "\n" + " ");
 
             /**
              * 判断当前是不是activity
@@ -147,15 +147,15 @@ public class ERouterProcessor extends AbstractProcessor {
             //获取当前的类型
             TypeMirror elementMirror = element.asType();
             //判断当前是不是Activity
-            if(mTypeUtils.isSubtype(elementMirror,activityMirror)){
+            if (mTypeUtils.isSubtype(elementMirror, activityMirror)) {
                 routerEntity.setType(RouterType.ACTIVITY);
-            }else {
+            } else {
                 throw new RuntimeException("@ERouter:====注解暂用于Activity类之上");
             }
-            mMessager.printMessage(Kind.NOTE, "ERouter:=7==判断当前是不是activity====="+elementMirror.toString()+"\n"+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=7==判断当前是不是activity=====" + elementMirror.toString() + "\n" + " ");
 
 
-            mMessager.printMessage(Kind.NOTE, "ERouter:=8==校验 path  group  用户传递过来的=====\n"+"\n"+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=8==校验 path  group  用户传递过来的=====\n" + "\n" + " ");
 
             // 校验 path  group  用户传递过来的
             if (checkERouterPath(routerEntity)) {
@@ -174,7 +174,7 @@ public class ERouterProcessor extends AbstractProcessor {
                     routerBeans.add(routerEntity);
                 }
             } else {
-                mMessager.printMessage(Diagnostic.Kind.ERROR, "ERouter:==10=校验 path  group失败，@ARouter注解未按规范配置，如：/study/study_main"+"\n"+" ");
+                mMessager.printMessage(Diagnostic.Kind.ERROR, "ERouter:==10=校验 path  group失败，@ARouter注解未按规范配置，如：/study/study_main" + "\n" + " ");
             }
         } // for 结束
 
@@ -184,30 +184,29 @@ public class ERouterProcessor extends AbstractProcessor {
          */
         TypeElement pathType = mElementUtils.getTypeElement(Config.EROUTER_API_PATH);
         TypeElement groupType = mElementUtils.getTypeElement(Config.EROUTER_API_GROUP);
-        mMessager.printMessage(Kind.NOTE, "ERouter:=11=通过反射拿到path 和 group的接口=====pathType:"+pathType+"\ngroupType"+groupType+"\npath:"+Config.EROUTER_API_PATH+"\ngroup:"+Config.EROUTER_API_GROUP+"\n"+" ");
-
+        mMessager.printMessage(Kind.NOTE, "ERouter:=11=通过反射拿到path 和 group的接口=====pathType:" + pathType + "\ngroupType" + groupType + "\npath:" + Config.EROUTER_API_PATH + "\ngroup:" + Config.EROUTER_API_GROUP + "\n" + " ");
 
 
         /**
          * 生成Path
          */
-        mMessager.printMessage(Kind.NOTE, "ERouter:=12=生成Path====="+"\n"+" ");
+        mMessager.printMessage(Kind.NOTE, "ERouter:=12=生成Path=====" + "\n" + " ");
         try {
             createPathFile(pathType);
         } catch (IOException e) {
             e.printStackTrace();
-            mMessager.printMessage(Diagnostic.Kind.NOTE, "ERouter:=13===生成PATH发生了异常 e:" + e.getMessage()+"\n"+" ");
+            mMessager.printMessage(Diagnostic.Kind.NOTE, "ERouter:=13===生成PATH发生了异常 e:" + e.getMessage() + "\n" + " ");
         }
 
         /**
          * 生成group
          */
-        mMessager.printMessage(Kind.NOTE, "ERouter:=14=生成group===="+"\n"+" ");
+        mMessager.printMessage(Kind.NOTE, "ERouter:=14=生成group====" + "\n" + " ");
         try {
-            createGroupFile(groupType,pathType);
+            createGroupFile(groupType, pathType);
         } catch (IOException e) {
             e.printStackTrace();
-            mMessager.printMessage(Kind.NOTE, "ERouter:=15=生成GROUP发生了异常====e:"+e.toString()+"\n"+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=15=生成GROUP发生了异常====e:" + e.toString() + "\n" + " ");
         }
 
 
@@ -217,24 +216,22 @@ public class ERouterProcessor extends AbstractProcessor {
     /**
      * 创建 group 文件
      *
-     * @param groupType
-     * @param pathType
-     *
-     * 模板代码：
-     * //public class ERouter$$GroupStudy implements IRouterGroup {
-     * //
-     * //    @Override
-     * //    public Map<String, Class<? extends IRouterPath>> getGroupMap() {
-     * //        Map<String, Class<? extends IRouterPath>> groupMap = new HashMap<>();
-     * //        groupMap.put("personal", ERouter$$Path$$study.class);
-     * //        return groupMap;
-     * //    }
-     * //}
-     *
+     * @param groupType TypeElement
+     * @param pathType  TypeElement
+     *                  <p>
+     *                  模板代码：
+     *                  //public class ERouter$$Group$$Study implements IRouterGroup {
+     *                  //    @Override
+     *                  //    public Map<String, Class<? extends IRouterPath>> getGroupMap() {
+     *                  //        Map<String, Class<? extends IRouterPath>> groupMap = new HashMap<>();
+     *                  //        groupMap.put("study", ERouter$$Path$$Study.class);
+     *                  //        return groupMap;
+     *                  //    }
+     *                  //}
      */
-    private void createGroupFile(TypeElement groupType,TypeElement pathType) throws IOException {
+    private void createGroupFile(TypeElement groupType, TypeElement pathType) throws IOException {
         // 判断是否有 要生成的 group文件，没有则返回
-        if (Utils.isEmpty(mAllGroupMap) || Utils.isEmpty(mAllPathMap)){
+        if (Utils.isEmpty(mAllGroupMap) || Utils.isEmpty(mAllPathMap)) {
             return;
         }
         /**
@@ -251,7 +248,7 @@ public class ERouterProcessor extends AbstractProcessor {
         //2、写方法
         // @Override
         // public Map<String, Class<? extends IRouterPath>> getGroupMap() {
-        MethodSpec.Builder methodBuilder= MethodSpec.methodBuilder("getGroupMap")
+        MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder("getGroupMap")
                 .addAnnotation(Override.class)
                 .addModifiers(Modifier.PUBLIC)
                 .returns(methodReturn);
@@ -266,13 +263,13 @@ public class ERouterProcessor extends AbstractProcessor {
                         WildcardTypeName.subtypeOf(ClassName.get(pathType))), //IRouterPath
                 Config.EROUTER_GOUP_METHOD_VAR,    //变量
                 ClassName.get(HashMap.class) //hashmap
-                );
+        );
 
         //4、写方法的其它内容
         //groupMap.put("personal", ERouter$$Path$$study.class);
 
         for (Map.Entry<String, String> entry : mAllGroupMap.entrySet()) {
-            mMessager.printMessage(Kind.NOTE, "ERouter:=14-1=====key:"+entry.getKey()+"\nvalue:"+entry.getValue());
+            mMessager.printMessage(Kind.NOTE, "ERouter:=14-1=====key:" + entry.getKey() + "\nvalue:" + entry.getValue());
 
             // groupMap.put("study", ERouter$$Path$$study.class);
             methodBuilder.addStatement("$N.put($S, $T.class)",  //模板
@@ -285,17 +282,16 @@ public class ERouterProcessor extends AbstractProcessor {
         methodBuilder.addStatement("return $N", Config.EROUTER_GOUP_METHOD_VAR);
 
 
-
-
         /**
          * 二、写类，添加上一步生成的方法
          */
         // 最终生成的类文件名   ERouter$$Group$$ + study
-        String finalClassName = Config.EROUTER_GROUP_FILE_NAME + mOptionModuleName;
+        String finalClassName = Config.EROUTER_GROUP_FILE_NAME + upperCaseFirst(mOptionModuleName);
         mMessager.printMessage(Diagnostic.Kind.NOTE, "ERouter:===APT生成路由组Group类文件：" +
                 mAptPackage + "." + finalClassName);
 
         TypeSpec typeSpec = TypeSpec.classBuilder(finalClassName) // 类名
+                .addJavadoc(Config.EROUTER_GROUP_WARNING_TIPS)   //添加注释
                 .addSuperinterface(ClassName.get(groupType)) // 实现IRouterGroup接口
                 .addModifiers(Modifier.PUBLIC) // public修饰符
                 .addMethod(methodBuilder.build()) // 方法的构建（方法参数 + 方法体）
@@ -303,7 +299,7 @@ public class ERouterProcessor extends AbstractProcessor {
 
 
         /**
-         * 三、写包，并生成类文件：ARouter$$Group$$study
+         * 三、写包，并生成文件：ARouter$$Group$$Study
          */
         //public class ERouter$$GroupStudy implements IRouterGroup {
         JavaFile.builder(mAptPackage, typeSpec)  // 包和类
@@ -314,36 +310,23 @@ public class ERouterProcessor extends AbstractProcessor {
 
     /**
      * 创建path文件
-     * @param pathType
-     * @throws IOException
      *
+     * @param pathType  TypeElement
+     * @throws IOException  IOException
      * 模板代码：
-     * //public class ERouter$$Path$$Study implements IRouterPath{
-     * //    @Override
-     * //    public Map<String, RouterEntity> getPathMap() {
-     * //        Map<String, RouterEntity> pathMap = new HashMap<>();
-     * //
-     * //
-     * //        pathMap.put("/study/study_main",
-     * //                RouterEntity.build(RouterType.ACTIVITY,
-     * //                        StudyMainActivity.class,
-     * //                        "/study/study_main",
-     * //                        "study"));
-     * //
-     * //
-     * //        pathMap.put("/study/study_details",
-     * //                RouterEntity.build(RouterType.ACTIVITY,
-     * //                        StudyDetailsActivity.class,
-     * //                        "/study/study_details",
-     * //                        "study"));
-     * //        return pathMap;
-     * //    }
-     * //
-     * //}
+     *                     //public class ERouter$$Path$$Study implements IRouterPath {
+     *                     //    @Override
+     *                     //    public Map<String, RouterEntity> getPathMap() {
+     *                     //        Map<String, RouterEntity> pathMap = new HashMap<>();
+     *                     //        pathMap.put("/study/study_details", RouterEntity.build(RouterType.ACTIVITY, StudyDetailsActivity.class, "/study/study_details", "study"));
+     *                     //        pathMap.put("/study/study_main", RouterEntity.build(RouterType.ACTIVITY, StudyMainActivity.class, "/study/study_main", "study"));
+     *                     //        return pathMap;
+     *                     //    }
+     *                     //}
      */
     private void createPathFile(TypeElement pathType) throws IOException {
         //判断 mAllPathMap 是否有数据，有则代表需要生成文件,否则返回
-        if(Utils.isEmpty(mAllPathMap)){
+        if (Utils.isEmpty(mAllPathMap)) {
             return;
         }
 
@@ -375,9 +358,9 @@ public class ERouterProcessor extends AbstractProcessor {
         //4、给方法添加其它内容，因为一个group中可能有很多个RouterEntity，需要循环添加
         for (Map.Entry<String, List<RouterEntity>> entry : mAllPathMap.entrySet()) {
             List<RouterEntity> pathList = entry.getValue();
-            mMessager.printMessage(Kind.NOTE, "ERouter:=12-1======key:"+entry.getKey()+"\nvalue:"+pathList.size());
+            mMessager.printMessage(Kind.NOTE, "ERouter:=12-1======key:" + entry.getKey() + "\nvalue:" + pathList.size());
             for (RouterEntity routerBean : pathList) {
-                mMessager.printMessage(Kind.NOTE, "ERouter:=12-2======routerBean:"+routerBean.toString());
+                mMessager.printMessage(Kind.NOTE, "ERouter:=12-2======routerBean:" + routerBean.toString());
 
                 /**
                  * 模板
@@ -400,32 +383,33 @@ public class ERouterProcessor extends AbstractProcessor {
                         routerBean.getPath(),               // 路径名
                         routerBean.getGroup()               // 组名
                 );
-                mMessager.printMessage(Kind.NOTE, "ERouter:=12-3======"+"\n"+" ");
+                mMessager.printMessage(Kind.NOTE, "ERouter:=12-3======" + "\n" + " ");
 
             } // for end
-            mMessager.printMessage(Kind.NOTE, "ERouter:=12-4======"+"\n"+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=12-4======" + "\n" + " ");
             // 5、生成return 语句： return pathMap;
             methodBuilder.addStatement("return $N", Config.EROUTER_PATH_METHOD_VAR);
-            mMessager.printMessage(Kind.NOTE, "ERouter:=12-5======"+"\n"+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=12-5======" + "\n" + " ");
             /**
              * 二、写类，添加上一步生成的方法
              */
             // 最终生成的类文件名  ERouter$$Path$$  + study
-            String finalClassName = Config.EROUTER_PATH_FILE_NAME + entry.getKey();
-            mMessager.printMessage(Kind.NOTE, "ERouter:=12-6======"+finalClassName+"\n"+" "+" "+" ");
+            String finalClassName = Config.EROUTER_PATH_FILE_NAME + upperCaseFirst(entry.getKey());
+            mMessager.printMessage(Kind.NOTE, "ERouter:=12-6======" + finalClassName + "\n" + " " + " " + " ");
             TypeSpec typeSpec = TypeSpec.classBuilder(finalClassName) // 类名
+                    .addJavadoc(Config.EROUTER_PATH_WARNING_TIPS)   //添加注释
                     .addSuperinterface(ClassName.get(pathType)) // 实现ARouterLoadPath接口
                     .addModifiers(Modifier.PUBLIC) // public修饰符
                     .addMethod(methodBuilder.build()) // 方法的构建（方法参数 + 方法体）
                     .build();
-            mMessager.printMessage(Kind.NOTE, "ERouter:=12-7======"+"\n"+" "+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=12-7======" + "\n" + " " + " ");
             /**
              * 三、写包，添加上一步生成的类，并创建文件
              */
             JavaFile.builder(mAptPackage, typeSpec) // 包和类
                     .build()            // JavaFile构建完成
                     .writeTo(mFiler); // 文件生成器开始生成类文件
-            mMessager.printMessage(Kind.NOTE, "ERouter:=12-8======"+"\n"+" "+" ");
+            mMessager.printMessage(Kind.NOTE, "ERouter:=12-8======" + "\n" + " " + " ");
             // 告诉Group
             mAllGroupMap.put(entry.getKey(), finalClassName);
         }
@@ -459,7 +443,7 @@ public class ERouterProcessor extends AbstractProcessor {
 
 
         // @ARouter注解中的group有赋值情况   用户传递进来 study，  我截取出来的也必须是 study
-        if (! Utils.isEmpty(group) && ! group.equals(mOptionModuleName)) {
+        if (!Utils.isEmpty(group) && !group.equals(mOptionModuleName)) {
             mMessager.printMessage(Diagnostic.Kind.ERROR, "@ERouter注解中的group值必须和子模块名一致！");
             return false;
         } else {
@@ -469,4 +453,19 @@ public class ERouterProcessor extends AbstractProcessor {
 
         return true;
     }
+
+    private static String upperCaseFirst(String str) {
+        return upperCase(str.substring(0, 1)) + str.substring(1);
+    }
+
+
+    private static String upperCase(String str) {
+
+        char[] ch = str.toCharArray();
+        if (ch[0] >= 'a' && ch[0] <= 'z') {
+            ch[0] = (char) (ch[0] - 32);
+        }
+        return new String(ch);
+    }
+
 }

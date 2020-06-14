@@ -1,6 +1,7 @@
 package com.fangye.intelligent;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -8,6 +9,7 @@ import com.fangye.annotation.EAutowired;
 import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
 import com.fangye.business.base.BaseActivity;
+import com.fangye.erouterapi.launcher.AutowiredManager;
 
 /**
  * 智能备考首页
@@ -26,6 +28,8 @@ public class IntelligentMainActivity extends BaseActivity {
 //        ActivityIntelligentBinding viewDataBinding  = DataBindingUtil.setContentView(this, R.layout.activity_intelligent);
 //        viewDataBinding.setLifecycleOwner(this);
 //        viewDataBinding.setClick(new ClickProxy());
+        AutowiredManager.getInstance().inject(this);
+        Log.e(TAG,"name ====:"+name);
     }
 
     public class ClickProxy{

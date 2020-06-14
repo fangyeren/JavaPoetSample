@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 全局路径管理类
+ * 全局路径管理类（枚举单例）
  */
 //public class   GlobalPathManager {
 

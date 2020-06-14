@@ -1,10 +1,13 @@
 package com.fangye.tutor;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.fangye.annotation.EAutowired;
 import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
+import com.fangye.business.base.BaseActivity;
+import com.fangye.erouterapi.launcher.AutowiredManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 @TestRouter(path = "/tutor/tutor_main")
 @ERouter(path = "/tutor/tutor_main")
-public class TutorMainActivity extends AppCompatActivity {
+public class TutorMainActivity extends BaseActivity {
 
     @EAutowired
     String name;
@@ -26,6 +29,8 @@ public class TutorMainActivity extends AppCompatActivity {
         //        ActivityTutorBinding viewDataBinding  = DataBindingUtil.setContentView(this, R.layout.activity_tutor);
         //        viewDataBinding.setLifecycleOwner(this);
         //        viewDataBinding.setClick(new ClickProxy());
+        AutowiredManager.getInstance().inject(this);
+        Log.e(TAG,"name ====:"+name);
     }
 
     public class ClickProxy {

@@ -8,11 +8,16 @@ import android.view.View.OnClickListener;
 
 import com.fangye.annotation.ERouter;
 import com.fangye.annotation.TestRouter;
+import com.fangye.annotation.model.RouterEntity;
 import com.fangye.business.GlobalPathManager;
 import com.fangye.business.base.BaseActivity;
+import com.fangye.erouterapi.launcher.ERouterManager;
+import com.fangye.erouterapi.template.IRouterPath;
 import com.fangye.user.UserMainActivity;
 
 import androidx.databinding.DataBindingUtil;
+
+import java.util.Map;
 
 @TestRouter(path = "/app/main_home")
 @ERouter(path = "/app/main_home")
@@ -44,10 +49,16 @@ public class MainActivity extends BaseActivity {
                 onGlabolMap();
             }
         });
-        findViewById(R.id.btn_router).setOnClickListener(new OnClickListener() {
+        findViewById(R.id.btn_router_no_encapsulation).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                onRouter();
+                onRouternoEncapsulation();
+            }
+        });
+        findViewById(R.id.btn_router_encapsulation).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRouterEncapsulation();
             }
         });
 
@@ -87,11 +98,41 @@ public class MainActivity extends BaseActivity {
             startActivity(intent);
         }
 
-        /**
-         * 路由方式跳转
-         */
-        public void onRouter(){
 
+    /**
+     * 路由封装后的跳转方式
+     */
+    private void onRouterEncapsulation() {
+        ERouterManager.getInstance()
+                .build("/study/study_main")
+                .withString("name","我是从mainactivity中过来的=encapsulation")
+                .navigation(this);
+    }
+
+    /**
+     * 路由未封装之前的跳转方式
+     */
+    private void onRouternoEncapsulation() {
+
+        ERouter$$Group$$Study group$$study = new ERouter$$Group$$Study();
+        Map<String, Class<? extends IRouterPath>> groupMap = group$$study.getGroupMap();
+        Class<? extends IRouterPath> study = groupMap.get("study");
+        try {
+            IRouterPath iRouterPath = study.newInstance();
+            Map<String, RouterEntity> pathMap = iRouterPath.getPathMap();
+            RouterEntity routerEntity = pathMap.get("/study/study_details");
+            if(routerEntity!=null){
+                Intent intent = new Intent(this,routerEntity.getDestination());
+                intent.putExtra("name","我是从mainactivity中过来的=noEncapsulation");
+                intent.putExtra("age",18);
+                startActivity(intent);
+            }
+
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
+    }
 //    }
 }

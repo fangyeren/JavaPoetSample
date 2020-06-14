@@ -37,11 +37,18 @@
         android:text="类加载方式跳转" />
 
     <Button
-        android:id="@+id/btn_router"
+        android:id="@+id/btn_router_no_encapsulation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="路由方式跳转" />
+        android:text="路由方式跳转-未封装使用" />
+
+    <Button
+        android:id="@+id/btn_router_encapsulation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="路由方式跳转-封装使用" />
 
 
 </LinearLayout>

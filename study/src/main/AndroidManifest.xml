@@ -7,6 +7,9 @@
         <activity
             android:name=".StudyMainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".StudyDetailsActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

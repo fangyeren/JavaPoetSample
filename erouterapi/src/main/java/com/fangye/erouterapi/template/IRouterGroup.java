@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Template of group ,标准
  */
-public interface IRouterGoup {
+public interface IRouterGroup {
 
     Map<String, Class<? extends IRouterPath>> getGroupMap();
 }
