@@ -36,7 +36,7 @@ import javax.tools.Diagnostic;
 
 @AutoService(Processor.class)
 @SupportedAnnotationTypes({Config.ANNOTATION_EAUTOWIRED_TYPE})
-@SupportedSourceVersion(SourceVersion.RELEASE_7) // 同学们：这个是必填的哦
+@SupportedSourceVersion(SourceVersion.RELEASE_7)
 public class EAutowiredProcessor extends AbstractProcessor {
 
     private Elements elementUtils; // 类信息
@@ -44,8 +44,8 @@ public class EAutowiredProcessor extends AbstractProcessor {
     private Messager messager; // 日志
     private Filer filer; // 生成文件
 
-    // 临时map存储，用来存放被@Parameter注解的属性集合，生成类文件时遍历
-    // key:类节点, value:被@Parameter注解的属性集合
+    // 临时map存储，用来存放被@EAutowired注解的属性集合，生成类文件时遍历
+    // key:类节点, value:被@EAutowired注解的属性集合
     private Map<TypeElement, List<Element>> tempParameterMap = new HashMap<>();
 
     @Override
@@ -73,7 +73,8 @@ public class EAutowiredProcessor extends AbstractProcessor {
                     // 如果Map集合中的key：类节点存在，直接添加属性
                     if (tempParameterMap.containsKey(enclosingElement)) {
                         tempParameterMap.get(enclosingElement).add(element);
-                    } else { // 没有存放 key == StudyMainActivity
+                    } else {
+                        // 没有存放 key == StudyMainActivity
                         List<Element> fields = new ArrayList<>();
                         fields.add(element);
                         tempParameterMap.put(enclosingElement, fields);
