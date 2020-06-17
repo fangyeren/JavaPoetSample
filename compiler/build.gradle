@@ -3,14 +3,14 @@ apply plugin: 'java-library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //编译期做事情的服务
+    //编译期做事情的服务，官方地址：https://github.com/google/auto/tree/master/service
     compileOnly'com.google.auto.service:auto-service:1.0-rc7'
     annotationProcessor'com.google.auto.service:auto-service:1.0-rc7'
 
-    // 依赖注解
+    // 依赖注解（我们自定义的注解）
     implementation project(":annotation")
 
-    //javapoet
+    //javapoet，官方地址：https://github.com/square/javapoet
     implementation "com.squareup:javapoet:1.12.1"
 }
 

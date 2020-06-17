@@ -43,13 +43,14 @@ import javax.tools.Diagnostic.Kind;
 /**
  * 编译期会执行这个类
  */
-// 编译期绑定注解，AutoService 会自动在META-INF/service文件下生成Processor的配置文件，
+// 向javac 注册我们自定义的注解处理器，这样在javac编译时，才会调用到我们这个自定义的注解处理器方法 process
+// AutoService 会自动在META-INF/service文件下生成Processor的配置文件，
 // 该文件中就是实现该服务接口的具体实现类，当外部程序使用这个模块时，就能通过META-INF/service里的配置文件找到具体的实现类
 // 并加载实例化，完成模块的注入
 @AutoService(Processor.class)
 //监控某个注解，如果只有一个就不用写“{}”，具体的注解类放到Config中，方便管理
 @SupportedAnnotationTypes({Config.ANNOTATION_EROUTER_TYPE})
-// 使用的源代码版本 ，这个必须要写
+// 使用的源代码版本
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 //从各个模块传入进来的数据，通过apt传进来
 @SupportedOptions({Config.OPTION_MODULE_NAME, Config.OPTION_PACKAGE_NAME})
