@@ -41,10 +41,10 @@ import javax.tools.Diagnostic;
 import javax.tools.Diagnostic.Kind;
 
 /**
- * 编译期会执行这个类
+ * 编译期会执行这个类，用来获取activity类上的信息
  */
 // 向javac 注册我们自定义的注解处理器，这样在javac编译时，才会调用到我们这个自定义的注解处理器方法 process
-// AutoService 会自动在META-INF/service文件下生成Processor的配置文件，
+// AutoService 会自动在META-INF/service文件下生成Processor的配置文件，如果不写@AutoService，需要手动添加META-INF/service
 // 该文件中就是实现该服务接口的具体实现类，当外部程序使用这个模块时，就能通过META-INF/service里的配置文件找到具体的实现类
 // 并加载实例化，完成模块的注入
 @AutoService(Processor.class)
@@ -66,10 +66,10 @@ public class ERouterProcessor extends AbstractProcessor {
     private String mAptPackage;  // apt生成文件包名
     private String mOptionModuleName;  //moduleName
 
-    // 仓库一  PATH
+    // PATH数据存储，获取后统一生成Path模板
     private Map<String, List<RouterEntity>> mAllPathMap = new HashMap<>();
 
-    // 仓库二 GROUP
+    // GROUP数据存储，获取后统一生成
     private Map<String, String> mAllGroupMap = new HashMap<>();
 
     /**
@@ -86,6 +86,7 @@ public class ERouterProcessor extends AbstractProcessor {
         mTypeUtils = processingEnvironment.getTypeUtils();
         mOptionModuleName = processingEnvironment.getOptions().get(Config.OPTION_MODULE_NAME);
         mAptPackage = processingEnvironment.getOptions().get(Config.OPTION_PACKAGE_NAME);
+        mMessager.printMessage(Kind.NOTE, "ERouter:===init=====this.hashcode:" + this.hashCode());
         mMessager.printMessage(Kind.NOTE, "ERouter:===init=====:mAptPackage:" + mAptPackage + "\nmOptionModuleName:" + mOptionModuleName);
     }
 

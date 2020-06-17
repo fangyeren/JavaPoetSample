@@ -1,11 +1,10 @@
 package com.fangye.compiler;
 
-import com.fangye.annotation.ERouter;
-
 /**
  * 全局常量
  */
 public class Config {
+
     /**
      * apt传递过来的数据
      */
@@ -29,18 +28,18 @@ public class Config {
 
 
     /**
-     * 提供给外界使用的接口，是一种标准，定义到api模块中
+     * 提供给外界使用的接口，是一种标准，定义到api模块中，complier module不会依赖 erouterapi ,故通过全类名反射来获取
      */
     // ERouter api 包名
     private static final String EROUTER_API_PACKAGE = "com.fangye.erouterapi.template";
 
-    // ERouter api 的 IRouterGroup 高层标准
+    // ERouter api 的 IRouterGroup 标准
     public static String EROUTER_API_GROUP = EROUTER_API_PACKAGE + ".IRouterGroup";
 
-    // ERouter api 的 IRouterPath 高层标准
+    // ERouter api 的 IRouterPath 标准
     public static String EROUTER_API_PATH = EROUTER_API_PACKAGE + ".IRouterPath";
 
-    // ERouter api 的 ISyringe ，用于Activity 参数传递
+    // ERouter api 的 IAutowired ，用于Activity 参数传递
     public static String EROUTER_API_PARAMETER = EROUTER_API_PACKAGE + ".IAutowired";
 
 
@@ -56,7 +55,7 @@ public class Config {
 
 
     /**
-     * 需要生成的文件名对应的前缀
+     * 需要生成的文件名对应的前缀或者后缀
      */
     // 实现IRouterGroup 生成文件名称前缀为 ARouter$$Path$$
     public static final String EROUTER_PATH_FILE_NAME = "ERouter$$Path$$";

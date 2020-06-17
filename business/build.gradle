@@ -45,7 +45,7 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
-    implementation project(":annotation")
-    annotationProcessor project(":compiler")
-    api project(":erouterapi")
+    implementation project(":erouter_annotation")
+    annotationProcessor project(":erouter_compiler")
+    api project(":erouter_api")
 }

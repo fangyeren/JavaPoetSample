@@ -29,9 +29,10 @@
 //import javax.tools.Diagnostic.Kind;
 //
 ///**
-// * 编译期会执行这个类
+// * 编译期会执行这个类 ，用于获取activity类上的信息
 // */
-//// 编译期绑定注解，AutoService 会自动在META-INF/service文件下生成Processor的配置文件，
+//// 向javac 注册我们自定义的注解处理器，这样在javac编译时，才会调用到我们这个自定义的注解处理器方法 process
+//// AutoService 会自动在META-INF/service文件下生成Processor的配置文件，如果不写@AutoService，需要手动添加META-INF/service
 //// 该文件中就是实现该服务接口的具体实现类，当外部程序使用这个模块时，就能通过META-INF/service里的配置文件找到具体的实现类
 //// 并加载实例化，完成模块的注入
 //@AutoService(Processor.class)

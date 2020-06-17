@@ -34,6 +34,13 @@ import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
+/**
+ * 编译期会执行这个类，主要用来获取field上的注解信息
+ */
+// 向javac 注册我们自定义的注解处理器，这样在javac编译时，才会调用到我们这个自定义的注解处理器方法 process
+// AutoService 会自动在META-INF/service文件下生成Processor的配置文件，如果不写@AutoService，需要手动添加META-INF/service
+// 该文件中就是实现该服务接口的具体实现类，当外部程序使用这个模块时，就能通过META-INF/service里的配置文件找到具体的实现类
+// 并加载实例化，完成模块的注入
 @AutoService(Processor.class)
 @SupportedAnnotationTypes({Config.ANNOTATION_EAUTOWIRED_TYPE})
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
@@ -159,7 +166,7 @@ public class EAutowiredProcessor extends AbstractProcessor {
             /**
              * 三、写类，并添加 通过factory 生成的方法
              */
-            // 最终生成的类文件名（类名$$Parameter）    Order_MainActivity$$Parameter
+            // 最终生成的类文件名（类名$$Autowired）    StudyMainActivity$$Autowired
             String finalClassName = typeElement.getSimpleName() + Config.EROUTER_AUTOWIRED_FILE_NAME;
             messager.printMessage(Diagnostic.Kind.NOTE, "APT生成获取参数类文件：" +
                     className.packageName() + "." + finalClassName);

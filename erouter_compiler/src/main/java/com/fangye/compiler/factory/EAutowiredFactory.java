@@ -15,21 +15,17 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 
 /**
- * 参数工厂
- *
- * // 只有一行
- * // 多行 循环
+ * 参数工厂 ，用来生成 方法内容的
  *
  */
 public class EAutowiredFactory {
 
-    // 方法的构建
     private MethodSpec.Builder method;
 
-    // 类名，如：MainActivity   Order_MainActivity
+    // 类名，如：StudyMainActivity   StudyMainActivity
     private ClassName className;
 
-    // Messager用来报告错误，警告和其他提示信息
+    // Messager从注解处理器串传入的 ，用来报告错误，警告和其他提示信息 ，
     private Messager messager;
 
     private EAutowiredFactory(Builder builder) {
@@ -73,7 +69,7 @@ public class EAutowiredFactory {
         String annotationValue = element.getAnnotation(EAutowired.class).name();
         // 判断注解的值为空的情况下的处理（注解中有name值就用注解值）
         annotationValue = Utils.isEmpty(annotationValue) ? fieldName : annotationValue;
-        // TODO 最终拼接的前缀：
+        // 最终拼接的前缀 t，代表activity ,filedName 代表field 即可以给动态给上个页面传过来的数据赋值
         String finalValue = "t." + fieldName;
         // t.s = t.getIntent().
         String methodContent = finalValue + " = t.getIntent().";
@@ -92,7 +88,6 @@ public class EAutowiredFactory {
             }
         }
 
-        // 健壮代码
         if (methodContent.endsWith(")")) {
             // 添加最终拼接方法内容语句
             method.addStatement(methodContent, annotationValue);
