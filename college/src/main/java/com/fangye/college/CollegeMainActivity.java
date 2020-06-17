@@ -12,7 +12,7 @@ import com.fangye.erouterapi.launcher.AutowiredManager;
 import androidx.annotation.Nullable;
 
 /**
- * 个人中心首页
+ * 翼课学院首页
  */
 @TestRouter(path = "/college/user_main")
 @ERouter(path = "/college/user_main")
